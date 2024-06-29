@@ -1,0 +1,32 @@
+.game-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding: 16px;
+  }
+  
+  .game-item {
+    background: #f4f4f4;
+    padding: 16px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    flex: 1 1 calc(25% - 32px); /* Adjust this value based on the desired number of items per row */
+    box-sizing: border-box;
+  }
+  
+  .game-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+  }
+  
+  .game-item h2 {
+    font-size: 18px;
+    margin: 12px 0 8px;
+  }
+  
+  .game-item p {
+    color: #666;
+    font-size: 14px;
+  }

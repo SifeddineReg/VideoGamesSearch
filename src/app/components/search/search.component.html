@@ -1,5 +1,5 @@
-<div>
-    <input type="text" [(ngModel)]="query" placeholder="Rechercher un jeu vidéo">
-    <button (click)="search()">Rechercher</button>
-  </div>
-  <app-game-list [games]="games"></app-game-list>
+<div class="search-container">
+  <input type="text" [(ngModel)]="query" placeholder="Rechercher un jeu vidéo">
+  <button (click)="search()">Rechercher</button>
+</div>
+<app-game-list [games]="games"></app-game-list>
