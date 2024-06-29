@@ -1,0 +1,5 @@
+<div *ngFor="let game of games">
+    <h2>{{ game.name }}</h2>
+    <img [src]="game.background_image" alt="{{ game.name }}">
+    <p>{{ game.released }}</p>
+</div>
