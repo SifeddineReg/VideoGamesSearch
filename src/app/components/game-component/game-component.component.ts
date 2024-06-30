@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { NgFor } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 
+import { environment } from '../../../environement/environement';
+
 @Component({
   standalone: true,
   selector: 'app-game-component',
@@ -23,7 +25,7 @@ export class GameComponent implements OnInit {
   }
 
   fetchGameDetails(gameId: string): void {
-  fetch(`https://api.rawg.io/api/games/${gameId}?key=c9545eec8e5e4b85bcf86ebdf01c7d3d`)
+  fetch(`https://api.rawg.io/api/games/${gameId}?key=${environment.apiKey}`)
     .then(response => response.json())
     .then(data => {
       this.game = {
