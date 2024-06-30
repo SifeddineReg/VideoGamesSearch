@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
+import { environment } from '../../../environement/environement';
+
 @Component({
   selector: 'app-game-list',
   standalone: true,
@@ -65,7 +67,7 @@ export class GameListComponent implements OnInit, AfterViewInit {
     }
 
     if (page == 1) {
-      const url = `https://api.rawg.io/api/games?key=c9545eec8e5e4b85bcf86ebdf01c7d3d`
+      const url = `https://api.rawg.io/api/games?key=${environment.apiKey}`
       await fetch(url)
       .then(response => response.json())
       .then(data => {
@@ -78,7 +80,7 @@ export class GameListComponent implements OnInit, AfterViewInit {
       });
     }
     else {
-      const url = `https://api.rawg.io/api/games?key=c9545eec8e5e4b85bcf86ebdf01c7d3d&page=${page}`
+      const url = `https://api.rawg.io/api/games?key=${environment.apiKey}&page=${page}`
       await fetch(url)
         .then(response => response.json())
         .then(data => {
