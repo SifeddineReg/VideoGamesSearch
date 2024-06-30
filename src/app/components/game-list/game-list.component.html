@@ -1,7 +1,70 @@
-<div class="game-list">
-    <div class="game-item" *ngFor="let game of games">
-      <h2>{{ game.name }}</h2>
-      <img [src]="game.background_image" alt="{{ game.name }}">
-      <p>Date de sortie : {{ game.released }}</p>
-    </div>
+<div *ngIf="is_loading" class="loading">
+  <div class="loading_spinner"></div>
+  <div class="loading_text">Loading...</div>
+</div>
+
+<div class="carousel">
+  <h2>Latest Releases</h2>
+  <div class="carousel-container" #carouselContainer>
+      <div class="carousel-item" *ngFor="let post of visibleItems_release">
+          <a [routerLink]="['/post', post.id]" class="latest_post_link">
+              <div class="latest_post_image">
+                  <img [src]="post.background_image" alt="{{ post.name }}" />
+                  <h3 class="latest_post_title">{{ post.name }}</h3>
+              </div>
+          </a>
+      </div>
+  </div> 
+</div>
+
+<div class="most-popular">
+  <h2>Most Popular</h2>
+  <div class="grid-container">
+      <div class="grid-item" *ngFor="let post of most_popular">
+          <a [routerLink]="['/post', post.id]" class="latest_post_link">
+              <div class="latest_post_image">
+                  <img [src]="post.background_image" alt="{{ post.name }}" />
+                  <h3 class="latest_post_title">{{ post.name }}</h3>
+              </div>
+          </a>
+      </div>
+  </div> 
+</div>
+
+<div class="all_games">
+  <h2>All Games</h2>
+  <div class="filter-bar">
+      <input [(ngModel)]="filterName" placeholder="Filter by Name" />
+      <input [(ngModel)]="filterRating" placeholder="Filter by rating" />
+      <input [(ngModel)]="filterGenres" placeholder="Filter by genres" />
+      <input [(ngModel)]="filterReviews" placeholder="Filter by reviews" />
+      <button (click)="applyFilters()">Apply Filters</button>
+      <button (click)="reset()">Reset</button>
   </div>
+  
+  <div class="games-table">
+      <table>
+          <thead>
+              <tr>
+                  <th>Name</th>
+                  <th>Rating</th>
+                  <th>Genres</th>
+                  <th>Link</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let game of paginatedGames">
+                  <td>{{ formatNames(game.name) }}</td>
+                  <td>{{ game.rating }}</td>
+                  <td>{{ formatGenres(game.genres) }}</td>
+                  <td><a [routerLink]="['/post', game.id]">View</a></td>
+              </tr>
+          </tbody>
+      </table>
+      <div class="pagination">
+          <button (click)="prevPage()" [disabled]="currentPage === 1">Previous</button>
+          <span>Page {{ currentPage }} of {{ totalPages }}</span>
+          <button (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button>
+      </div>
+  </div>    
+</div>

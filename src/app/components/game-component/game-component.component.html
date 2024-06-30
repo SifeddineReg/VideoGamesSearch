@@ -1,0 +1,27 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+<div class="game-details">
+    <a href="/" class="back-button">Back to list</a>
+    <div class="game-container">
+        <img src="{{ game.background_image }}" alt="{{ game.name }}" class="game-image">
+        <div class="game-info">
+            <h2>{{ game.name }}</h2>
+            <p><strong>Rating:</strong> {{ game.rating }}</p>
+            <p><strong>Developer:</strong> {{ formatDevelopers(game.developers) }}</p>
+            <p><strong>Genres:</strong> {{ formatGenres(game.genres) }}</p>
+            <p><strong>Tags:</strong> {{ formatTags(game.tags) }}</p>
+            <p><strong>Achievement Count:</strong> {{ game.achievements_count }}</p>
+            <p><strong>Release Date:</strong> {{ game.released }}</p>
+            <p><strong>Platforms:</strong> {{ formatPlatforms(game.platforms) }}</p>
+            <div class="store_links">
+                <p><strong>Stores:</strong>
+                <div class="link" *ngFor="let store of game.stores">
+                    <a [href]="store.store.domain.startsWith('http') ? store.store.domain : 'http://' + store.store.domain" target="_blank">
+                        <i [class]="getIconClass(store.store.slug)"></i> {{ store.store.name }}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <h2>Description</h2>
+    <p [innerHTML]="sanitizeDescription(game.description)" class="desc"></p>
+</div>

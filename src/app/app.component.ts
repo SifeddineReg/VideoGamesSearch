@@ -1,15 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { SearchComponent } from './components/search/search.component';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterModule, SearchComponent],
+  imports: [CommonModule, RouterModule, FormsModule],
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
+
 export class AppComponent {
   title = 'game-search';
 }

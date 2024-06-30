@@ -1,21 +1,29 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { environment } from '../../environement/environement';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-export class RawgService {
-  private apiUrl = 'https://api.rawg.io/api';
+export class GameService {
+  private cache = new Map<string, any>();
 
-  constructor(private http: HttpClient) {}
+  constructor() {}
 
-  searchGames(query: string): Observable<any> {
-    const params = new HttpParams()
-      .set('key', environment.apiKey)
-      .set('search', query);
+  fetchGames(): Promise<any> {
+    return fetch('https://api.rawg.io/api/games?key=c9545eec8e5e4b85bcf86ebdf01c7d3d')
+      .then(response => response.json())
+      .then(data => data.results);
+  }
 
-    return this.http.get(`${this.apiUrl}/games`, { params });
+  fetchGameDetails(gameId: string): Promise<any> {
+    if (this.cache.has(gameId)) {
+      return Promise.resolve(this.cache.get(gameId));
+    } else {
+      return fetch(`https://api.rawg.io/api/games/${gameId}?key=c9545eec8e5e4b85bcf86ebdf01c7d3d`)
+        .then(response => response.json())
+        .then(data => {
+          this.cache.set(gameId, data);
+          return data;
+        });
+    }
   }
 }
